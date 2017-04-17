@@ -1,0 +1,10 @@
+<div>
+  <ul class="history">
+    <button *ngIf="records.length" id="deleteAll" (click)="deleteAll()">DELETE ALL</button>
+    <li *ngFor="let record of records">
+      <span class="badge">{{record.orin}}</span>
+      <span class="tran">{{record.tran}}</span>
+      <button class="delete" (click)="deleteRecord(record)">x</button>
+    </li>
+  </ul>
+</div>
