@@ -1,9 +1,11 @@
-import {Component, OnInit} from '@angular/core';
-import {Injectable} from '@angular/core';
+import {Component, OnInit, Output} from '@angular/core';
+import {Injectable, EventEmitter} from '@angular/core';
 import {TranslateService} from "../service/translate.service";
 import {ApiService} from "../service/api.service";
-import {HistoryService} from "../service/history.service"
-import {Observable} from "rxjs";
+import {HistoryService} from "../service/history.service";
+import  {Record} from '../record';
+import {Observable, BehaviorSubject} from "rxjs";
+import * as Rx from "rxjs";
 
 @Component({
   selector: 'app-translator',
@@ -15,6 +17,14 @@ export class TranslatorComponent implements OnInit {
 
   input: string;
   output: string;
+/*  in= document.getElementById('input');
+  input$ = Rx.Observable
+    .fromEvent<KeyboardEvent>(this.in,'keyup')
+    .debounceTime(1000);*/
+
+  @Output('addRecordEvent')
+  addReEvent = new EventEmitter < Record >();
+
 
   constructor(private  apiSvr: ApiService,
               private  historySrv: HistoryService) {
@@ -22,6 +32,13 @@ export class TranslatorComponent implements OnInit {
     if (lastRecord !== null) {
       this.input = lastRecord.orin;
       this.output = lastRecord.tran;
+
+/*
+      this.input$.subscribe(
+        x => alert(x),
+        error => alert(error),
+        () => this.submit()
+      );*/
     }
   }
 
@@ -35,7 +52,11 @@ export class TranslatorComponent implements OnInit {
       .subscribe(
         data => this.output = data.json().text,
         error => alert(error),
-        () => this.historySrv.addRecord(JSON.parse('{"orin":"' + this.input + '","tran":"' + this.output + '"}')),
+        () => {
+          let myRecord = JSON.parse('{"orin":"' + this.input + '","tran":"' + this.output + '"}');
+          this.historySrv.addRecord(myRecord);
+          this.addReEvent.emit(myRecord);
+        }
       );
   }
 

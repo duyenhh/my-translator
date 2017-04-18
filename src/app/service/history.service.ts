@@ -6,13 +6,14 @@ import * as Rx from "rxjs";
 
 @Injectable()
 export class HistoryService {
-  ob = new Subject< Record[]>();
-  public ob$ = this.ob.asObservable();
 
 
-  InitOb() {
+
+
+
+/*  constructor(){
     this.ob.next(this.getHistory());
-  }
+  }*/
 
   getHistory(): Record[] {
     return JSON.parse(localStorage.getItem('history'));
@@ -27,7 +28,6 @@ export class HistoryService {
 
   updateHistory(newR: Record[]) {
     localStorage.setItem('history', JSON.stringify(newR));
-    this.ob.next(this.getHistory());
   }
 
   getLastRecord(): Record {
