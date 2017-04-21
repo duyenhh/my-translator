@@ -5,7 +5,7 @@
       <span class="badge">{{record.orin}}</span>
       <span class="tran">{{record.tran}}</span>
       <button class="delete" (click)="deleteRecord(record)">x</button>
-      <button *ngIf="!isFavorite(record)" class="delete" (click)="addFavorite(record)"  >+</button>
+      <button favorite-directive *ngIf="!isFavorite(record)" class="favorite" (click)="addFavorite(record)"  >+</button>
     </li>
   </ul>
 </div>

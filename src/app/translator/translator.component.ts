@@ -17,10 +17,7 @@ export class TranslatorComponent implements OnInit {
 
   input: string;
   output: string;
-/*  in= document.getElementById('input');
-  input$ = Rx.Observable
-    .fromEvent<KeyboardEvent>(this.in,'keyup')
-    .debounceTime(1000);*/
+
 
   @Output('addRecordEvent')
   addReEvent = new EventEmitter < Record >();
@@ -32,18 +29,22 @@ export class TranslatorComponent implements OnInit {
     if (lastRecord !== null) {
       this.input = lastRecord.orin;
       this.output = lastRecord.tran;
-
-/*
-      this.input$.subscribe(
-        x => alert(x),
-        error => alert(error),
-        () => this.submit()
-      );*/
     }
+
+
   }
 
 
   ngOnInit() {
+    const MyInput = document.getElementById('input_box');
+    let  input$ = Rx.Observable.fromEvent<KeyboardEvent>(MyInput,'keyup');
+    let submitOb = input$.debounceTime(900)
+      .map(x=> this.input)
+      .subscribe(
+        x => {if (x!==  "")  this.submit()},
+        error => alert(error),
+       // () => this.submit()
+      );
   }
 
 
@@ -54,7 +55,7 @@ export class TranslatorComponent implements OnInit {
         error => alert(error),
         () => {
           let myRecord = JSON.parse('{"orin":"' + this.input + '","tran":"' + this.output + '"}');
-          this.historySrv.addRecord(myRecord);
+           this.historySrv.addRecord(myRecord);
           this.addReEvent.emit(myRecord);
         }
       );

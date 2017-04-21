@@ -8,20 +8,19 @@ import * as Rx from "rxjs";
 export class HistoryService {
 
 
+ constructor(){
 
-
-
-/*  constructor(){
-    this.ob.next(this.getHistory());
-  }*/
+  }
 
   getHistory(): Record[] {
-    return JSON.parse(localStorage.getItem('history'));
+   return JSON.parse(localStorage.getItem('history'));
   }
 
   addRecord(record: Record) {
-    let newList = this.getHistory().filter(h => h.orin !== record.orin);
-    if (newList.length >= 10) newList.shift();
+    let newList = this.getHistory()
+   if(newList!== null)
+   {  newList = this.getHistory().filter(h => h.orin !== record.orin);
+    if (newList.length >= 10) newList.shift();}
     newList.push(record);
     this.updateHistory(newList);
   }

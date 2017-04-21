@@ -11,6 +11,9 @@ import { ManageComponent } from './manage/manage.component';
 import { FavoriteComponent } from './favorite/favorite.component';
 import { AppRoutingModule }     from './app-routing.module';
 import {FavoriteService} from './service/favorite.service';
+import {FavoriteDirective} from './myDirectives/favorite.directive';
+
+
 
 @NgModule({
   declarations: [
@@ -18,7 +21,8 @@ import {FavoriteService} from './service/favorite.service';
     TranslatorComponent,
     HistoryComponent,
     ManageComponent,
-    FavoriteComponent
+    FavoriteComponent,
+    FavoriteDirective
   ],
   imports: [
     BrowserModule,

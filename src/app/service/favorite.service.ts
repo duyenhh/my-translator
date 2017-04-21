@@ -4,6 +4,7 @@ import {Record} from '../record';
 export class FavoriteService {
 
   constructor(){
+
   }
   getFavorites(): Record[] {
     return JSON.parse(localStorage.getItem('favorite'));

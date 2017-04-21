@@ -3,6 +3,7 @@ import  {Record} from '../record';
 import {HistoryService} from '../service/history.service';
 import {FavoriteService} from '../service/favorite.service';
 import {forEach} from "@angular/router/src/utils/collection";
+import {FavoriteDirective} from '../myDirectives/favorite.directive';
 @Component({
   selector: 'app-history',
   templateUrl: './history.component.html',
@@ -46,6 +47,7 @@ export class HistoryComponent implements OnInit {
     return false;*/
 
     let len1 = this.favoriteSrv.getFavorites();
+    if(len1 === null) return false;
     let len2 =this.favoriteSrv.getFavorites().filter(h => h.orin !== record.orin);
     if( len1.length === len2.length) return false;
     else return true;
