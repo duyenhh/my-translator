@@ -12,7 +12,13 @@ import { FavoriteComponent } from './favorite/favorite.component';
 import { AppRoutingModule }     from './app-routing.module';
 import {FavoriteService} from './service/favorite.service';
 import {FavoriteDirective} from './myDirectives/favorite.directive';
-
+import { PipeComponent } from './pipe/pipe.component';
+import  {AuthGuard} from './guard/auth.guard';
+import { LoginComponent } from './login/login.component';
+import {AlertService} from "./service/alert.service";
+import { RegisterComponent } from './register/register.component';
+import {AuthenticationService} from "./service/authentication.service";
+import {UserService} from "./service/user.service";
 
 
 @NgModule({
@@ -22,7 +28,10 @@ import {FavoriteDirective} from './myDirectives/favorite.directive';
     HistoryComponent,
     ManageComponent,
     FavoriteComponent,
-    FavoriteDirective
+    FavoriteDirective,
+    PipeComponent,
+    LoginComponent,
+    RegisterComponent
   ],
   imports: [
     BrowserModule,
@@ -30,7 +39,7 @@ import {FavoriteDirective} from './myDirectives/favorite.directive';
     HttpModule,
     AppRoutingModule
   ],
-  providers: [HistoryService,FavoriteService],
+  providers: [HistoryService,FavoriteService, AuthGuard, AlertService, AuthenticationService,UserService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

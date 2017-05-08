@@ -8,7 +8,8 @@ import {FavoriteService} from '../service/favorite.service';
 })
 export class FavoriteComponent implements OnInit {
   records : Record[];
-  constructor( private  favoriteSrv :FavoriteService) {
+  constructor( private  favoriteSrv :FavoriteService
+                ) {
     this.records = favoriteSrv.getFavorites();
   }
 
@@ -19,4 +20,9 @@ export class FavoriteComponent implements OnInit {
     this.records = this.records.filter(h => h.orin !== record.orin);
     this.favoriteSrv.updateFavorite(this.records);
   }
+
+
+
+
+
 }
